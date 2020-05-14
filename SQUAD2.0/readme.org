@@ -1,0 +1,24 @@
+* 数据集介绍
+  + 斯坦福问答数据集(Stanford Question answer Dataset, SQuAD)是一个阅读理解数据集，由一组维基百科文章上的众包工作者提出的问题组成，其中每个问题的答案都是来自相应阅读文章的一段文字，或者说是片段，或者这个问题可能是无法回答的。
+  + SQUAD2.0相比于1.0新增加了5万个没有答案的样本，这5万个没有答案的样本问题由众包人员精心设计，以便它们与段落有关，并且段落包含一个貌似合理的答案——与问题要求的类型相同，因此提升了该数据集做抽取式QA的难度
+  + 论文地址：[[https://arxiv.org/abs/1806.03822]]
+  + 训练集下载链接[[https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json]]
+  + 验证集下载链接[[https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json]]
+  + [[https://rajpurkar.github.io/SQuAD-explorer/][squad2.0榜单]]
+  + 无答案样本案例如下
+    #+DOWNLOADED: file:/Users/blacktear/Downloads/IMG_05619F754250-1.jpeg @ 2020-04-28 21:15:34
+    [[file:Screen-Pictures/SQUAD2.0/2020-04-28_21-15-34_IMG_05619F754250-1.jpeg]]
+* 数据集json字段含义
+** 上级目录
+     + version:v2.0 # 数据集版本信息
+     + data # 数据集数据字段，列表形式
+       + title # 一组数据的标题
+       + paragraphs: # 一组数据的问题、答案、文档组，列表形式
+** 下级目录/paragraphs
+     + qas #一个文档对应的多个问题、答案，列表形式
+       + question:
+       + id:
+       + answers: {text # 答案文本; answer_start # 答案起点位置标签}
+       + is_impossible #是否包含答案，True为无答案，False为有答案
+     + context: #文档内容
+

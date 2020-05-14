@@ -1,0 +1,21 @@
+** 论文
+   + ALBERT / Rank 7
+     + 论文地址：[[https://arxiv.org/abs/1909.11942]]
+     + ALBERT的贡献在于缩减了参数量、提升了训练速度并且在多句子任务上有提升效果。为了缩减参数量，把嵌入词向量参数分解出来，并且不同的层之间共享参数。在改进BERT的性能上，去掉了传统BERT的NSP预训练任务，添加了SOP任务（句子顺序预测），该任务通过自监督损失，用于关注句子之间的连贯性，对于多个句子输入任务能有显著的效果
+     + 从模型角度看，WordPiece的词嵌入的表示是孤立的，模型内部隐藏层的词嵌入表示是包含上下文信息的，ALBERT把O（V*H）的嵌入参数分解成O（V*E + E*H），使用较小的E维度来编码词向量能够获得分布更加均匀的词向量表示，相比于使用更大的H维度。这样通过分解嵌入参数来缩减模型参数。其次ALBERT使用了跨层共享全部参数，又大大地缩减了模型内部参数量
+     + 在预训练方式上也做出了改进，将NSP改成了预测句子之间顺序 因为NSP任务是分别同等概率采样同一篇文章中连续的句子片段和不同文章中的句子片段，预测片段之间的蕴含关系，这样的任务其实过于简单了，不同文章片段之间的关系很容易就能够预测出来。因此这里改成了SOP任务（句子顺序预测任务），通过同等概率采样同一篇文章中连续2个句子片段作为正样本，交换正样本的句子顺序作为负样本，迫使模型学到细粒度的句子连贯性，相比于NSP任务增加了训练的难度，能够提升句子对的下游任务性能
+     + V2版本的预训练模型去除了dropout层，效果更好。理论上说，dropout是用于模型减弱过拟合的影响，然而在Albert预训练过程中并没有达到过拟合的现象，因此去除了dropout
+** 实验结果
+   + 预处理步骤
+     - 每个context对应的多个(question, id, answers, is_impossible)分别处理为一个example，共享context
+     - 每个example对context进行doc_stride为128的滑动窗口切分为若干个子example，并处理为可以输入到模型的feature
+   + 模型结构
+     
+   + 训练
+     - cd torch
+     - bash run_squad2.sh
+   + pytorch/基于hunggingface的transformers [[https://github.com/huggingface/transformers]]
+     | pretrained-model |   lr | batch | epoch | max-query-len | max-seq-len | doc_stride |    F1 |    EM | 有答案F1 | 有答案EM | 无答案F1 | 无答案EM | best-f1 | best-em |
+     | albert-base-v2   | 3e-5 | 4*3   |     2 |            64 |         384 |        128 | 79.51 | 76.28 |    79.11 |   72.638 |    79.91 |    79.91 |   79.52 |   76.29 |
+     | albert-base-v2   | 5e-5 | 4*12  |     2 |            64 |         384 |        128 |       |       |          |          |          |          |         |         |
+     |                  |      |       |       |               |             |            |       |       |          |          |          |          |         |         |

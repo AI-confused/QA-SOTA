@@ -1,0 +1,11 @@
+* 数据集介绍
+  + CoQA是一个用于构建会话问题回答系统的大型数据集。CoQA挑战的目标是测试机器理解文本段落和回答会话中出现的一系列相互关联的问题的能力。
+  + CoQA包含127000多个问题和8000多个对话的答案。每段对话都是由两名工作人员以问答的形式对一篇文章进行对话收集而成。CoQA的独特之处在于:1)问题是会话性的;2)答案可以是自由格式的文本;3)每个答案后面都有一个在文中强调过的证据;4)文章收集自七个不同的领域。CoQA存在许多现有阅读理解数据集中不存在的具有挑战性的现象，如共引用和语用推理。
+  + 训练集下载链接[[https://nlp.stanford.edu/data/coqa/coqa-train-v1.0.json]]
+  + 验证集下载链接[[https://nlp.stanford.edu/data/coqa/coqa-dev-v1.0.json]]
+  + 论文地址：[[https://arxiv.org/abs/1808.07042]]
+  + [[https://stanfordnlp.github.io/coqa/][coqa榜单]]
+  + 样本形式
+    #+DOWNLOADED: file:/var/folders/73/53s3wczx1l32608prn_fdgrm0000gn/T/TemporaryItems/（screencaptureui正在存储文稿，已完成18）/截屏2020-05-06 上午10.14.37.png @ 2020-05-06 10:14:43
+    [[file:Screen-Pictures/%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BB%8B%E7%BB%8D/2020-05-06_10-14-43_%E6%88%AA%E5%B1%8F2020-05-06%20%E4%B8%8A%E5%8D%8810.14.37.png]]
+    
